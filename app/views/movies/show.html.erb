@@ -9,3 +9,10 @@
     <p><%= actor.name %>
   <% end %>
 </section>
+
+<p>New Actor</p>
+<%= form_tag "/movies/#{@movie.id}" do%>
+  <%= label_tag :actor %>
+  <%= text_field_tag :actor %>
+  <%= submit_tag "Add Actor"%>
+<% end %>

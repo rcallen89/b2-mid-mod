@@ -8,6 +8,7 @@ RSpec.describe "Movie Show Page", type: :feature do
     @actor_1 = Actor.create!(name: "Dwayne Johnson", age: "47")
     @actor_2 = Actor.create!(name: "Jason Stathem", age: "52")
     @actor_3 = Actor.create!(name: "Vanessa Kirby", age: "31")
+    @actor_4 = Actor.create!(name: "Helen Mirren", age: "74")
 
     actor_movie1 = ActorMovie.create!(actor: @actor_1, movie: @movie_1)
     actor_movie2 = ActorMovie.create!(actor: @actor_2, movie: @movie_1)
@@ -25,5 +26,17 @@ RSpec.describe "Movie Show Page", type: :feature do
       expect(page).to have_content("Vanessa Kirby\nDwayne Johnson\nJason Stathem")
     end
   end
-  
+
+  it 'shows a form to input an actors add to add them to the movie' do
+    visit "/movies/#{@movie_1.id}"
+
+    fill_in :actor, with: @actor_4.name
+    click_on "Add Actor"
+
+    expect(current_path).to eq("/movies/#{@movie_1.id}")
+
+    within "#actors" do
+      expect(page).to have_content("Vanessa Kirby\nDwayne Johnson\nJason Stathem\nHelen Mirren")
+    end
+  end
 end
