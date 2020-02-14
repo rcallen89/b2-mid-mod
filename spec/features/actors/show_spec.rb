@@ -4,7 +4,6 @@ RSpec.describe 'Actor show page', type: :feature do
   before :each do
     @studio_1 = Studio.create!(name: "Universal")
 
-
     @actor_1 = Actor.create!(name: "Dwayne Johnson", age: "47")
 
     movie_1 = Movie.create!(name: "Hobbs & Shaw", year: "2019", genre: "Action", studio: @studio_1)
@@ -16,7 +15,7 @@ RSpec.describe 'Actor show page', type: :feature do
 
   it 'can show name, age, and a list of their movies' do
     visit "actors/#{@actor_1.id}"
-
+    
     expect(page).to have_content("Name: Dwayne Johnson")
     expect(page).to have_content("Age: 47")
 
